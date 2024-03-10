@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import {
+  AudioToText,
   Orthography,
   ProsConsDiscusser,
-  Translation,
   TextToAudio,
+  Translation,
 } from '../core';
+import { AudioToTextType } from '../core/types/audio-to-text.type';
 import {
   OrthographyDto,
   ProsConsDiscusserDto,
@@ -19,6 +21,7 @@ export class GptService {
     private readonly prosConsServ: ProsConsDiscusser,
     private readonly translateServ: Translation,
     private readonly textToAudioServ: TextToAudio,
+    private readonly audioToTextServ: AudioToText,
   ) {}
 
   orthographyCheck(orthographyDto: OrthographyDto) {
@@ -43,5 +46,9 @@ export class GptService {
 
   async getAudioFile(fileId: string) {
     return this.textToAudioServ.getAudioFile(fileId);
+  }
+
+  async audioToText(audioToTextType: AudioToTextType) {
+    return this.audioToTextServ.audioTotextUseCase(audioToTextType);
   }
 }

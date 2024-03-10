@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import {
+  AudioToText,
   Orthography,
   ProsConsDiscusser,
   TextToAudio,
@@ -18,6 +19,7 @@ import { GptService } from './gpt.service';
     ProsConsDiscusser,
     Translation,
     TextToAudio,
+    AudioToText,
   ],
 })
 export class GptModule {}

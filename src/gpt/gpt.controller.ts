@@ -6,9 +6,14 @@ import {
   Param,
   Post,
   Res,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
+import { AudioToTextType } from '../core/types/audio-to-text.type';
 import {
+  AudioToTextDto,
   FileIdDto,
   OrthographyDto,
   ProsConsDiscusserDto,
@@ -16,6 +21,8 @@ import {
   TranslationDto,
 } from './dtos';
 import { GptService } from './gpt.service';
+import { createMulterOptions } from './interceptors/audio-file-interceptor';
+import { AudioFilePipe } from './pipes/audio-file.pipe';
 
 @Controller('gpt')
 export class GptController {
@@ -72,5 +79,20 @@ export class GptController {
     res.setHeader('Content-Type', 'audio/mp3');
     res.status(HttpStatus.OK);
     res.sendFile(audioFile);
+  }
+
+  @Post('audio-to-text')
+  @UseInterceptors(FileInterceptor('file', createMulterOptions))
+  async audioToText(
+    @UploadedFile(AudioFilePipe)
+    file: Express.Multer.File,
+    @Body() audioToText: AudioToTextDto,
+  ) {
+    let body: AudioToTextType = { file };
+
+    if (audioToText?.prompt) {
+      body = { ...body, prompt: audioToText.prompt };
+    }
+    return this.gptService.audioToText(body);
   }
 }
