@@ -4,12 +4,12 @@ import {
   Logger,
 } from '@nestjs/common';
 import { ProsConsDiscusserDto } from 'src/gpt/dtos';
-import { OpenIaService } from './openia';
+import { OpenAiService } from './open-ai';
 
 @Injectable()
 export class ProsConsDiscusser {
   logger = new Logger(ProsConsDiscusser.name);
-  constructor(private readonly openIaServ: OpenIaService) {}
+  constructor(private readonly openIaServ: OpenAiService) {}
 
   async prosConsDiscusserUseCase({ prompt }: ProsConsDiscusserDto) {
     try {
@@ -31,9 +31,7 @@ export class ProsConsDiscusser {
             Contras:
             - 
             -
-            -
-
-  `,
+            -`,
           },
           {
             role: 'user',

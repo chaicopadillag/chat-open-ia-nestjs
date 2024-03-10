@@ -4,12 +4,12 @@ import {
   Logger,
 } from '@nestjs/common';
 import { OrthographyDto } from 'src/gpt/dtos';
-import { OpenIaService } from './openia';
+import { OpenAiService } from './open-ai';
 
 @Injectable()
 export class Orthography {
   logger = new Logger(Orthography.name);
-  constructor(private readonly openIaServ: OpenIaService) {}
+  constructor(private readonly openIaServ: OpenAiService) {}
 
   async orthographyUseCase({ prompt }: OrthographyDto) {
     try {
