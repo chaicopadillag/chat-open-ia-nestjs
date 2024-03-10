@@ -9,12 +9,12 @@ import { OpenAiService } from './open-ai';
 @Injectable()
 export class Translation {
   logger = new Logger(Translation.name);
-  constructor(private readonly openIaServ: OpenAiService) {}
+  constructor(private readonly openAiServ: OpenAiService) {}
 
   async translateUseCase({ lang, prompt }: TranslationDto) {
     try {
       this.logger.log('Iniciando consulta al open ia...');
-      const resp = await this.openIaServ.openIa.chat.completions.create({
+      const resp = await this.openAiServ.openIa.chat.completions.create({
         messages: [
           {
             role: 'system',
@@ -33,7 +33,7 @@ export class Translation {
       this.logger.log('Respuesta de openai...', resp.choices[0].message);
       return resp.choices[0].message;
     } catch (error) {
-      console.log(error);
+      this.logger.error(error);
       throw new InternalServerErrorException(
         'Error al traducir el texto, por favor intenta con otro texto',
       );

@@ -9,12 +9,12 @@ import { OpenAiService } from './open-ai';
 @Injectable()
 export class ProsConsDiscusser {
   logger = new Logger(ProsConsDiscusser.name);
-  constructor(private readonly openIaServ: OpenAiService) {}
+  constructor(private readonly openAiServ: OpenAiService) {}
 
   async prosConsDiscusserUseCase({ prompt }: ProsConsDiscusserDto) {
     try {
       this.logger.log('Iniciando consulta al open ia...');
-      const resp = await this.openIaServ.openIa.chat.completions.create({
+      const resp = await this.openAiServ.openIa.chat.completions.create({
         messages: [
           {
             role: 'system',
@@ -44,7 +44,7 @@ export class ProsConsDiscusser {
 
       return resp.choices[0].message;
     } catch (error) {
-      console.log(error);
+      this.logger.error(error);
       throw new InternalServerErrorException(
         'Error al procesar tu pregunta, por favor intenta con otro texto',
       );
@@ -54,7 +54,7 @@ export class ProsConsDiscusser {
   async prosConsStreamUseCase({ prompt }: ProsConsDiscusserDto) {
     try {
       this.logger.log('Iniciando consulta al open ia...');
-      return await this.openIaServ.openIa.chat.completions.create({
+      return await this.openAiServ.openIa.chat.completions.create({
         stream: true,
         messages: [
           {
