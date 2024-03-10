@@ -23,7 +23,7 @@ export class AudioToText {
           file: fs.createReadStream(file.path),
           model: 'whisper-1',
           language: 'es',
-          response_format: 'vtt',
+          response_format: 'verbose_json',
           prompt,
         });
 
