@@ -16,7 +16,9 @@ export class AudioToText {
 
   async audioTotextUseCase({ file, prompt }: AudioToTextType) {
     try {
-      this.logger.log('Iniciando consulta al openai...');
+      this.logger.log(
+        `Iniciando consulta al openai with... ${JSON.stringify({ file, prompt })}`,
+      );
 
       const transcription =
         await this.openAiServ.openIa.audio.transcriptions.create({
@@ -27,8 +29,7 @@ export class AudioToText {
           prompt,
         });
 
-      this.logger.log('La respuesta de openai...');
-      this.logger.log(transcription);
+      this.logger.log('La respuesta de openai... is Ok');
 
       return transcription;
     } catch (error) {
