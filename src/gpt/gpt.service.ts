@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import {
   AudioToText,
+  ImageGeneration,
+  ImageVariation,
   Orthography,
   ProsConsDiscusser,
   TextToAudio,
@@ -8,6 +10,8 @@ import {
 } from '../core';
 import { AudioToTextType } from '../core/types/audio-to-text.type';
 import {
+  ImageGerationDto,
+  ImageVariationDto,
   OrthographyDto,
   ProsConsDiscusserDto,
   TextToAudioDto,
@@ -22,6 +26,8 @@ export class GptService {
     private readonly translateServ: Translation,
     private readonly textToAudioServ: TextToAudio,
     private readonly audioToTextServ: AudioToText,
+    private readonly imageGenerateServ: ImageGeneration,
+    private readonly imageVariationServ: ImageVariation,
   ) {}
 
   orthographyCheck(orthographyDto: OrthographyDto) {
@@ -50,5 +56,17 @@ export class GptService {
 
   async audioToText(audioToTextType: AudioToTextType) {
     return this.audioToTextServ.audioTotextUseCase(audioToTextType);
+  }
+
+  async imageGeneration(imageGenerationDto: ImageGerationDto) {
+    return this.imageGenerateServ.imageGenerationUseCase(imageGenerationDto);
+  }
+
+  async imageGenerationByFileName(fileName: string) {
+    return this.imageGenerateServ.imageGenerationByFileName(fileName);
+  }
+
+  async imageVariation(imageVariationDto: ImageVariationDto) {
+    return this.imageVariationServ.imageVariationUseCase(imageVariationDto);
   }
 }
