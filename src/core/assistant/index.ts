@@ -82,12 +82,8 @@ export class Assistant {
 
   async getMessagesList(threadId: string) {
     this.logger.debug(`Start get messages list of threadId: ${threadId}`);
-    const resp = await this.openAiServ.openIa.beta.threads.messages.list(
-      threadId,
-      {
-        order: 'desc',
-      },
-    );
+    const resp =
+      await this.openAiServ.openIa.beta.threads.messages.list(threadId);
 
     this.logger.debug(
       `Response open ai list messages: ${JSON.stringify(resp.data, null, 2)}`,
@@ -98,6 +94,6 @@ export class Assistant {
       content: m.content[0].text.value,
     }));
 
-    return messages;
+    return messages.reverse();
   }
 }
