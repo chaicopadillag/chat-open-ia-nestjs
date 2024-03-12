@@ -1,5 +1,6 @@
 import { registerAs } from '@nestjs/config';
 
 export const openAiConfig = registerAs('openAi', () => ({
-  openAiKey: process.env.OPEN_AI_KEY,
+  openAiKey: process.env.OPENAI_API_KEY,
+  assistantId: process.env.OPENAI_ASSISTANT_ID,
 }));

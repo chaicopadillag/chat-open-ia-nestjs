@@ -8,7 +8,7 @@ import { OpenAiService } from './open-ai';
 
 @Injectable()
 export class ProsConsDiscusser {
-  logger = new Logger(ProsConsDiscusser.name);
+  private logger = new Logger(ProsConsDiscusser.name);
   constructor(private readonly openAiServ: OpenAiService) {}
 
   async prosConsDiscusserUseCase({ prompt }: ProsConsDiscusserDto) {

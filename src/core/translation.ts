@@ -8,7 +8,7 @@ import { OpenAiService } from './open-ai';
 
 @Injectable()
 export class Translation {
-  logger = new Logger(Translation.name);
+  private logger = new Logger(Translation.name);
   constructor(private readonly openAiServ: OpenAiService) {}
 
   async translateUseCase({ lang, prompt }: TranslationDto) {

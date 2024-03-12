@@ -8,7 +8,7 @@ import { OpenAiService } from './open-ai';
 
 @Injectable()
 export class Orthography {
-  logger = new Logger(Orthography.name);
+  private logger = new Logger(Orthography.name);
   constructor(private readonly openAiServ: OpenAiService) {}
 
   async orthographyUseCase({ prompt }: OrthographyDto) {

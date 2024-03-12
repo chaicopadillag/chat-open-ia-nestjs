@@ -14,7 +14,7 @@ import { VoicesType } from './types/text-to-audio.type';
 
 @Injectable()
 export class TextToAudio {
-  logger = new Logger(TextToAudio.name);
+  private logger = new Logger(TextToAudio.name);
   private audioFoler: string;
   constructor(private readonly openAiServ: OpenAiService) {
     this.audioFoler = path.resolve(__dirname, `./../../generated/audios`);

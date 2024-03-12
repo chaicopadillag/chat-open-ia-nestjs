@@ -10,7 +10,7 @@ import { AudioToTextType } from './types/audio-to-text.type';
 
 @Injectable()
 export class AudioToText {
-  logger = new Logger(AudioToText.name);
+  private logger = new Logger(AudioToText.name);
 
   constructor(private readonly openAiServ: OpenAiService) {}
 

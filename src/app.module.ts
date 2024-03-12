@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { appConfig, database, openAiConfig } from './env';
 import { GptModule } from './gpt/gpt.module';
+import { AssistantModule } from './assistant/assistant.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { GptModule } from './gpt/gpt.module';
       load: [appConfig, database, openAiConfig],
     }),
     GptModule,
+    AssistantModule,
   ],
   controllers: [AppController],
   providers: [AppService],
