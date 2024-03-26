@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  app:
+    image: open-ai
+    container_name: open-ai
+    build:
+      context: .
+      target: ${STAGE}
+      dockerfile: Dockerfile
+    # volumes:
+    #   - .:/app/
+    #   - /app/node_modules
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      PORT: ${PORT}
+      APP_DOMAIN: ${APP_DOMAIN}
+      APP_NAME: ${APP_NAME}
+      APP_VERSION: ${APP_VERSION}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_ASSISTANT_ID: ${OPENAI_ASSISTANT_ID}
